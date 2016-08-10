@@ -34,8 +34,9 @@ class TesthelloFriends3(unittest.TestCase):
                 self.Data("David", "I hug David", "male case"))
 
         for test in data:
-            self.assertIn(test.answer,
-                          greet_a_person(test.input, self.people),
+            self.assertEqual(test.answer,
+                             "\n".join(greet_a_person(test.input,
+                                                      self.people)),
                           test.error_msg)
 
 
@@ -44,9 +45,37 @@ class TesthelloFriends3(unittest.TestCase):
                 self.Data("Tony", "Hey Tony?! How have you been?", "male case"))
 
         for test in data:
-            self.assertIn(test.answer,
-                             greet_a_person(test.input, self.people),
+            self.assertEqual(test.answer,
+                          "\n".join(greet_a_person(test.input, self.people)),
+                          test.error_msg)
+
+    def test_greet_stranger(self):
+        data = (self.Data("UnknownGuy",
+                          ("Hi UnknownGuy. My name is Marcus\nGive UnknownGuy"
+                            " a firm handshake while looking him in the eyes"), 
+                          "male case"),
+                self.Data("UnknownGirl",
+                          ("Hi UnknownGirl. My name is Marcus\nGive "
+                           "UnknownGirl a slight wave while telling "
+                           "her my name"), 
+                          "female case"))
+
+        for test in data:
+            self.assertEqual(test.answer,
+                             "\n".join(greet_a_person(test.input,
+                                                      self.people)),
                              test.error_msg)
+
+    def test_print_to_screen(self):
+        pass
+
+    def test_greet_a_person_bad_input(self):
+        with self.assertRaises(TypeError) as cm:
+            greet_a_person("Christy", None)
+
+        the_exception = cm.exception
+        self.assertEqual(cm.expected, type(cm.exception))
+
 
 if __name__ == "__main__":
     unittest.main()

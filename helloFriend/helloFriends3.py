@@ -28,6 +28,9 @@ def greet_a_person(name, people):
     gender = None
     greetings = []
 
+    if not isinstance(people, dict):
+        raise TypeError("recieved: {}\nexpected: {}".format(type(people), dict))
+
     # figure out friend type
     if name in people.get("close_friends"):
         type_of_friend = "close_friend"
