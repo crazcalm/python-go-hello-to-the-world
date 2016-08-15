@@ -5,10 +5,10 @@ from helloFriends2 import _greet_not_so_close_friend
 from helloFriends2 import _greet_stranger
 from helloFriends2 import _greet_male
 from helloFriends2 import _greet_female
-from helloFriends2 import greet_a_person
 
 
 class Testing(unittest.TestCase):
+
     def setUp(self):
         pass
 
@@ -16,12 +16,14 @@ class Testing(unittest.TestCase):
         pass
 
     def test_testing(self):
-        self.assertEqual(1,1)
+        self.assertEqual(1, 1)
+
 
 class TestHelloFriends2(unittest.TestCase):
+
     def setUp(self):
-        self.expected_input = ["Marcus", "Jovanna Teran", "杜明卫", b"Name1", 
-                               u"Name2" ]
+        self.expected_input = ["Marcus", "Jovanna Teran", "杜明卫", b"Name1",
+                               u"Name2"]
         self.unexpected_input = [None, "", "\n\n\n\n", True, False, 5, 20.5,
                                  [], {}]
 

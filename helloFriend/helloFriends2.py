@@ -1,17 +1,23 @@
 def _greet_close_friend(friend):
     print("I hug {}\n".format(friend))
 
+
 def _greet_not_so_close_friend(friend):
     print("Hey {}?! How have you been?\n".format(friend))
+
 
 def _greet_stranger(stranger):
     print("Hi {}. My name is Marcus".format(stranger))
 
+
 def _greet_male(male):
-    print("Give {} a firm handshake while looking him in the eyes\n".format(male))
+    print("Give {} a firm handshake while looking him in the eyes\n"
+          .format(male))
+
 
 def _greet_female(female):
     print("Give {} a slight wave while telling her my name\n".format(female))
+
 
 def greet_a_person(name, people):
     """
@@ -49,7 +55,7 @@ def greet_a_person(name, people):
         elif gender == "female":
             _greet_female(name)
         else:
-            pass      
+            pass
 
 
 if __name__ == "__main__":
@@ -65,7 +71,7 @@ if __name__ == "__main__":
         "males": males,
         "females": females
     }
-    
+
     greet_a_person("Christy", people)
     greet_a_person("Julie", people)
     greet_a_person("UnknownGuy", people)

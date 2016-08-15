@@ -1,23 +1,33 @@
 def print_to_screen(string_list):
+    if not isinstance(string_list, (list, tuple)):
+        raise TypeError("recieved: {}\nexpected: {}"
+                        .format(type(string_list), (list, tuple)))
+
     for string in string_list:
         print(string)
     print("\n")
 
+
 def _greet_close_friend(friend):
     return "I hug {}".format(friend)
+
 
 def _greet_not_so_close_friend(friend):
     return "Hey {}?! How have you been?".format(friend)
 
+
 def _greet_stranger(stranger):
     return "Hi {}. My name is Marcus".format(stranger)
+
 
 def _greet_male(male):
     return ("Give {} a firm handshake while looking"
             " him in the eyes").format(male)
 
+
 def _greet_female(female):
     return "Give {} a slight wave while telling her my name".format(female)
+
 
 def greet_a_person(name, people):
     """
@@ -29,7 +39,12 @@ def greet_a_person(name, people):
     greetings = []
 
     if not isinstance(people, dict):
-        raise TypeError("recieved: {}\nexpected: {}".format(type(people), dict))
+        raise TypeError("recieved: {}\nexpected: {}"
+                        .format(type(people), dict))
+
+    if not isinstance(name, str):
+        raise TypeError("recieved: {}\nexpected: {}"
+                        .format(type(people), str))
 
     # figure out friend type
     if name in people.get("close_friends"):
@@ -76,7 +91,7 @@ if __name__ == "__main__":
         "males": males,
         "females": females
     }
-    
+
     print_to_screen(greet_a_person("Christy", people))
     print_to_screen(greet_a_person("Julie", people))
     print_to_screen(greet_a_person("UnknownGuy", people))
