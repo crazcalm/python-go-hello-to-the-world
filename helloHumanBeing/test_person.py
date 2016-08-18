@@ -1,4 +1,5 @@
 import unittest
+import sys
 from datetime import date
 
 from person import Person
@@ -72,6 +73,14 @@ class TestFriend(unittest.TestCase):
 
         # expected answers
         self.age = 28
+        self.print_person = ("First Name: Marcus\n"
+                             "Last Name: Willock\n"
+                             "Birthday: 1988-01-19\n"
+                             "Age: 28\n"
+                             "Gender: male\n"
+                             "Likes: ['Python', 'Golang']\n"
+                             "Dislikes: ['Waking up early', "
+                             "'reality tv']\n")
 
     def test_test(self):
         self.assertEqual(1,1)
@@ -107,9 +116,11 @@ class TestFriend(unittest.TestCase):
             self.person.birthday("Jan 1, 1988")
         self.assertEqual(cm.expected, type(cm.exception))
 
-    def tearDown(self):
-        pass
+    def test__str__(self):
+        print(self.person)
+        sys_output = sys.stdout.getvalue()
+        self.assertIn(self.print_person, sys_output)
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(buffer=True)

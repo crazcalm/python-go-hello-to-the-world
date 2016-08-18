@@ -1,63 +1,22 @@
 from datetime import date
 
 
-class Network:
-
-    def __init__(self, close_friends=set(), not_so_close_friends=set(),
-                 strangers=set(), people_i_dislike=set()):
-        self.close_friends = close_friends
-        self.not_so_close_friends = not_so_close_friends
-        self.strangers = strangers
-        self.people_i_dislike = people_i_dislike
-        self.groups = {"close_friends": self.close_friends,
-                       "not_so_close_friends": self.not_so_close_friends,
-                       "strangers": self.strangers,
-                       "people_i_dislike": self.people_i_dislike}
-
-    def has_group(self, group_name):
-        return hasattr(self, group_name)
-
-    def add_group(self, group_name, value=set()):
-        if self.has_group(group_name):
-            raise NameError("{} is already a group".format(group_name))
-
-        if not isinstance(value, set):
-            raise TypeError("recieved type: {}\nexpected type {}"
-                            .format(type(value), set))
-
-        self.__setattr__(group_name, value)
-
-        self.groups[group_name] = value
-
-    def get_group(self, person):
-        result = None
-        for key, value in self.groups.values():
-            if person in value:
-                result = key
-                break
-        return result
-
-    def __contains__(self, person):
-        union = set().union(*group.values())
-        return person in union
-
-    def __str__(self):
-        result = "Social Network:\n\n"
-        for key, value in self.groups.values():
-            result += "{}: {}\n".format(key, value)
-        return result
-
+def _date_validator(value):
+    if not isinstance(value, date):
+        raise TypeError("Need a object of type {}", type(date))
+    return value
 
 class Person:
 
     def __init__(self, first_name, last_name, birthday, gender, likes=[], 
-                 dislikes=[]):
+                 dislikes=[], network=None):
         self.first_name = first_name
         self.last_name = last_name
-        self._birthday = birthday  # Not being validated... 
+        self._birthday = _date_validator(birthday)
         self.gender = gender
         self.likes = likes
         self.dislikes = dislikes
+        self.network = network
 
     @property
     def birthday(self):
@@ -65,9 +24,7 @@ class Person:
 
     @birthday.setter
     def birthday(self, value):
-        if not instance(value, date):
-            raise TypeError("Need a object of type {}", type(date))
-        self._birthday = value
+        self._birthday = _date_validator(value)
 
     @property
     def age(self):
@@ -112,5 +69,6 @@ class Person:
 
 
 if __name__ == "__main__":
-    test = Person("Marcus", "Willock", date(1988, 1, 19), "mail")
-
+    test = Person("Marcus", "Willock", date(1988, 1, 19), "male",
+                  ["Python", "Golang"], ["Waking up early", "reality tv"])
+    print(test)
