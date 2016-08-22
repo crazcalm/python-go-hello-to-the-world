@@ -9,7 +9,7 @@ def _date_validator(value):
 class Person:
 
     def __init__(self, first_name, last_name, birthday, gender, likes=[], 
-                 dislikes=[], network=None):
+                 dislikes=[], network=None, greetings=None):
         self.first_name = first_name
         self.last_name = last_name
         self._birthday = _date_validator(birthday)
@@ -17,6 +17,7 @@ class Person:
         self.likes = likes
         self.dislikes = dislikes
         self.network = network
+        self.greetings = greetings
 
     @property
     def birthday(self):
