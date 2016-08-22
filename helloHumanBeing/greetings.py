@@ -17,10 +17,10 @@ class Greetings:
         else:
             self.relationships[type_of_relationship] = {gender: function}
 
-    def remove_greeting(self, type_of_relationship, gender):
+    def remove_a_greeting(self, type_of_relationship, gender):
         if self.relationships.get(type_of_relationship):
             if self.relationships[type_of_relationship].get(gender):
-                del self.relationship[type_of_relationship][gender]
+                del self.relationships[type_of_relationship][gender]
             else:
                 raise NameError("{} does not exist for {} relationship"
                           .format(gender))
@@ -28,19 +28,16 @@ class Greetings:
             raise NameError("No relationship by the name of {}"
                       .format(type_of_relationship))
 
-    def set_default_greeting(self, func):
-        self.default = func
-
     def greet_a_person(self, person, type_of_relationship):
         gender = person.gender
         if self.relationships.get(type_of_relationship):
             if self.relationships[type_of_relationship].get(gender):
                 func = self.relationships[type_of_relationship][gender]
-                func(person)
+                return func(person)
             else:
-                self.default_func(person)
+                return self.default_func(person)
         else:
-            self.default_func(person)
+            return self.default_func(person)
 
     def __str__(self):
         return ("Greetings!\n"
