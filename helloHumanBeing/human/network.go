@@ -16,8 +16,8 @@ func (n Network) String () string {
     var result string
     for key, group :=range n.groups{
         result += fmt.Sprintf("%s:\n", key)
-        for k, v :=range group {
-            result += fmt.Sprintf("\t%s: %v", k, v)
+        for _, p :=range group {
+            result += fmt.Sprintf("\t%s", p)
         }
     }
     return result
@@ -28,28 +28,35 @@ func (n Network) HasGroup (group string) bool {
     return ok
 }
 
-//Need to add error handling (Exiting the program is mean...).
-func (n Network) AddGroup (group string, value []Person) {
+func (n Network) AddGroup (group string, value []Person) error {
+    var err error
     if !n.HasGroup(group){
         n.groups[group] = value
     }else{
-        fmt.Fprintf(os.Stderr, "Group %s already exists", group)
-        os.Exit(1)
+        errMsg := fmt.Sprintf("Group %s already exists", group)
+        fmt.Fprintf(os.Stderr, errMsg)
+        err = fmt.Errorf(errMsg)
     }
+    return err
 }
 
 // Need to add error handling
-func (n Network) RemoveGroup (group string) {
+func (n Network) RemoveGroup (group string) error {
+    var err error
     if n.HasGroup(group){
         delete(n.groups, group)
     }else{
-        fmt.Fprintf(os.Stderr, "Group %s does not exist", group)
+        errMsg := fmt.Sprintf("Group %s does not exist", group)
+        fmt.Fprintf(os.Stderr, errMsg)
+        err = fmt.Errorf(errMsg)
     }
+    return err
 }
 
 // Need to add error handling
-func (n Network) GetGroup (p Person) string {
+func (n Network) GetGroup (p Person) (string, error) {
     var result string
+    var err error
     for group, people := range n.groups{
         for _, person := range people{
             if p.Equal(person){
@@ -57,5 +64,13 @@ func (n Network) GetGroup (p Person) string {
             }
         }
     }
-    return result
+
+    //Need to check that the result is real
+    _, ok := n.groups[result]
+    if !ok{
+        errMsg := fmt.Sprintf("Person %s is not in any groups", p)
+        err = fmt.Errorf(errMsg)
+    }
+
+    return result, err
 }
