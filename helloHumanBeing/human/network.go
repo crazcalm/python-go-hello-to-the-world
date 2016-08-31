@@ -1,6 +1,3 @@
-/*
-I need to learn how to create and propagate errors...
-*/
 package human
 
 import (
@@ -17,7 +14,7 @@ func (n Network) String () string {
     for key, group :=range n.groups{
         result += fmt.Sprintf("%s:\n", key)
         for _, p :=range group {
-            result += fmt.Sprintf("\t%s", p)
+            result += fmt.Sprintf("\t%s\n", p)
         }
     }
     return result
@@ -40,7 +37,6 @@ func (n Network) AddGroup (group string, value []Person) error {
     return err
 }
 
-// Need to add error handling
 func (n Network) RemoveGroup (group string) error {
     var err error
     if n.HasGroup(group){

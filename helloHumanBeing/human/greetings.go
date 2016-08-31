@@ -13,9 +13,9 @@ type Greetings struct {
 func (g Greetings) String() string {
 	var result string
 	for key, dict := range g.Greetings {
-		result += fmt.Sprintf("%s:", key)
-		for k, v := range dict {
-			result += fmt.Sprintf("\t%s: %v", k, v)
+		result += fmt.Sprintf("%s:\n", key)
+		for k, _ := range dict {
+			result += fmt.Sprintf("\t%s\n", k)
 		}
 	}
 	return result
@@ -26,7 +26,7 @@ func (g Greetings) AddAGreeting(relationship string, gender string,
 
 	genders, ok := g.Greetings[relationship]
 	if !ok {
-		g.Greetings[relationship][gender] = greeting
+		g.Greetings[relationship] = map[string]func(string)string{gender: greeting}
 	} else {
 		genders[gender] = greeting
 	}
