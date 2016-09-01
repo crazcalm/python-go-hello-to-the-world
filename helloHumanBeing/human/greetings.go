@@ -6,7 +6,7 @@ import (
 )
 
 type Greetings struct {
-	Greetings      map[string]map[string]func(string) string
+	Greetings       map[string]map[string]func(string) string
 	DefaultGreeting func(string) string
 }
 
@@ -26,7 +26,7 @@ func (g Greetings) AddAGreeting(relationship string, gender string,
 
 	genders, ok := g.Greetings[relationship]
 	if !ok {
-		g.Greetings[relationship] = map[string]func(string)string{gender: greeting}
+		g.Greetings[relationship] = map[string]func(string) string{gender: greeting}
 	} else {
 		genders[gender] = greeting
 	}
@@ -57,18 +57,15 @@ func (g Greetings) RemoveAGreeting(relationship, gender string) error {
 	return err
 }
 
-func (g Greetings) GreetAPerson(p Person, relationship string) (string, error){
-    var err error
+func (g Greetings) GreetAPerson(p Person, relationship string) string {
 	_, ok := g.Greetings[relationship]
 	if !ok {
-        errMsg := fmt.Sprintf("relationship %s does not exist\n", relationship)
-		fmt.Fprintf(os.Stderr, errMsg)
-        err = fmt.Errorf(errMsg)
+		return g.DefaultGreeting(p.FirstName)
 	}
 	greeting, ok := g.Greetings[relationship][p.Gender]
 	if !ok {
-		return g.DefaultGreeting(p.FirstName), err
+		return g.DefaultGreeting(p.FirstName)
 	}
 
-	return greeting(p.FirstName), err
+	return greeting(p.FirstName)
 }
