@@ -1,31 +1,81 @@
-def greet_close_friends(friends):
+def print_to_screen(string_list):
+    if not isinstance(string_list, (list, tuple)):
+        raise TypeError("recieved: {}\nexpected: {}"
+                        .format(type(string_list), (list, tuple)))
+
+    for string in string_list:
+        print(string)
+    print("\n")
+
+
+def _greet_close_friend(friend):
+    return "I hug {}".format(friend)
+
+
+def _greet_not_so_close_friend(friend):
+    return "Hey {}?! How have you been?".format(friend)
+
+
+def _greet_stranger(stranger):
+    return "Hi {}. My name is Marcus".format(stranger)
+
+
+def _greet_male(male):
+    return ("Give {} a firm handshake while looking"
+            " him in the eyes").format(male)
+
+
+def _greet_female(female):
+    return "Give {} a slight wave while telling her my name".format(female)
+
+
+def greet_a_person(name, people):
     """
-    If you greet both male and female friends in the same manner,
-    then this is fine.
+    I should be able to pass in a name of a person and figure out the proper
+    way to greet them...
     """
-    for friend in friends:
-        print("I hug {}\n".format(friend))
+    type_of_friend = None
+    gender = None
+    greetings = []
 
+    if not isinstance(people, dict):
+        raise TypeError("recieved: {}\nexpected: {}"
+                        .format(type(people), dict))
 
-def greet_not_so_close_friends(friends):
-    for friend in friends:
-        print("Hey {}?! How have you been?\n".format(friend))
+    if not isinstance(name, str):
+        raise TypeError("recieved: {}\nexpected: {}"
+                        .format(type(people), str))
 
+    # figure out friend type
+    if name in people.get("close_friends"):
+        type_of_friend = "close_friend"
+    elif name in people.get("not_so_close_friends"):
+        type_of_friend = "not_so_close_friend"
+    else:
+        type_of_friend = "stranger"
 
-def greet_strangers(strangers):
-    for stranger in strangers:
-        print("Hi {}. My name is Marcus\n".format(stranger))
+    # figure out gender
+    if name in people.get("males"):
+        gender = "male"
+    elif name in people.get("females"):
+        gender = "female"
+    else:
+        gender = "Unknown"
 
-
-def greet_males(males):
-    for male in males:
-        print("Give {} a firm handshake while looking him in the eyes"
-              .format(male))
-
-
-def greet_females(females):
-    for female in females:
-        print("Give {} a slight wave while telling her my name".format(female))
+    # figure out my actions
+    if type_of_friend == "close_friend":
+        greetings.append(_greet_close_friend(name))
+    elif type_of_friend == "not_so_close_friend":
+        greetings.append(_greet_not_so_close_friend(name))
+    elif type_of_friend == "stranger":
+        greetings.append(_greet_stranger(name))
+        if gender == "male":
+            greetings.append(_greet_male(name))
+        elif gender == "female":
+            greetings.append(_greet_female(name))
+        else:
+            pass
+    return greetings
 
 
 if __name__ == "__main__":
@@ -35,17 +85,15 @@ if __name__ == "__main__":
     males = ["David", "Tony", "Alex", "Ivan", "UnknownGuy"]
     females = ["Christy", "Carmela", "Evelyn", "Julie", "UnknownGirl"]
 
-    print("{}:".format(greet_close_friends.__name__))
-    greet_close_friends(close_friends)
+    people = {
+        "close_friends": close_friends,
+        "not_so_close_friends": not_so_close_friends,
+        "males": males,
+        "females": females
+    }
 
-    print("\n{}:".format(greet_not_so_close_friends.__name__))
-    greet_not_so_close_friends(not_so_close_friends)
-
-    print("\n{}:".format(greet_strangers.__name__))
-    greet_strangers(strangers)
-
-    print("\n{}:".format(greet_males.__name__))
-    greet_males(males)
-
-    print("\n{}:".format(greet_females.__name__))
-    greet_females(females)
+    print_to_screen(greet_a_person("Christy", people))
+    print_to_screen(greet_a_person("Julie", people))
+    print_to_screen(greet_a_person("UnknownGuy", people))
+    print_to_screen(greet_a_person("UnknownGirl", people))
+    print_to_screen(greet_a_person("UnknownUnknown", people))
