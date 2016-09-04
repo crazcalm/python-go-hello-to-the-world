@@ -33,10 +33,12 @@ func greetFemale(female string) string {
 
 // I need to rethink how I am going to write this...
 func greetAPerson(name string, people map[string][]string, genders map[string][]string) {
-	var typeOfFriend string
-	var gender string
-	var greetings []string
+	var typeOfFriend string // relationship of person
+	var gender string  // gender of person
+	var greetings []string // 
 
+    // Checks to see if there is a typeOfFriend relationship
+    // list for the name of the parson that was passed in.
 	for key, values := range people {
 		for _, value := range values {
 			if name == value {
@@ -44,16 +46,18 @@ func greetAPerson(name string, people map[string][]string, genders map[string][]
 				break
 			}
 		}
+        // This is used to break out of the outer for loop.
 		if typeOfFriend != "" {
 			break
 		}
 	}
 
-	// is there a way to do "if not"?
+	// If a relationship was not found, make them a stranger.
 	if typeOfFriend == "" {
 		typeOfFriend = "stranger"
 	}
 
+    // Checks to see if we know the gender for this person.
 	for key, values := range genders {
 		for _, value := range values {
 			if name == value {
@@ -61,6 +65,7 @@ func greetAPerson(name string, people map[string][]string, genders map[string][]
 				break
 			}
 		}
+        // Used to break out of the outer for loop.
 		if gender != "" {
 			break
 		}
