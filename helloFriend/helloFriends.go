@@ -35,7 +35,7 @@ func greetFemale(female string) string {
 func greetAPerson(name string, people map[string][]string, genders map[string][]string) {
 	var typeOfFriend string // relationship of person
 	var gender string  // gender of person
-	var greetings []string // 
+	var greetings []string //
 
     // Checks to see if there is a typeOfFriend relationship
     // list for the name of the parson that was passed in.
