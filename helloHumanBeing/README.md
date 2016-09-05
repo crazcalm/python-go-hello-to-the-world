@@ -10,6 +10,10 @@
     such for "del").
 ### cool points
 	1. implementing special methods saves lives!
+    2. python -m unittest discover -b
+        - The "-m" allows you to call python modules
+        - Discover is a unittest feature that allows you to "discover" and run
+          the tests in your project.
 
 ## Go Topics
 ### Struct
