@@ -16,7 +16,7 @@
 		- Once you get a sense of what packages exists, it becomes easier to use.
 	- Golang.org
 	- Go Time (podcast)
-	- Go 1.7 testing changes.
+	- Go 1.7 testing changes(https://tip.golang.org/pkg/testing/#hdr-Subtests_and_Sub_benchmarks)
 	- godoc
 		- This tool alows you to bring up a local version of the Go websites. I have not
 		  figured out how to get this working with Go Verson Manager, so I do not use it.
