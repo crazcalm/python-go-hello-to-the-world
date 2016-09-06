@@ -17,6 +17,7 @@
 	- Golang.org
 	- Go Time (podcast)
 	- Go 1.7 testing changes(https://tip.golang.org/pkg/testing/#hdr-Subtests_and_Sub_benchmarks)
+	- Go json example: https://gobyexample.com/json
 	- godoc
 		- This tool alows you to bring up a local version of the Go websites. I have not
 		  figured out how to get this working with Go Verson Manager, so I do not use it.
