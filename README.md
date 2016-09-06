@@ -2,7 +2,7 @@
 
 ##Section1: Introduction
 
-	The purpose of this talk is to give a brief tutorial of Python and Go while 
+	The purpose of this talk is to give a brief tutorial of Python and Go while
 	also comparing their different approaches to solving similar problems.
 
 	We will cover the following going through the following programs:
