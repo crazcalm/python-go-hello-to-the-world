@@ -47,12 +47,12 @@ func compareSlice(slice1, slice2 []string) bool {
 }
 
 type Person struct {
-	FirstName string
-	LastName  string
-	Birthday  time.Time // Need to learn how to use...
-	Gender    string
-	Likes     []string
-	Dislikes  []string
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Birthday  time.Time `json:"birthday"`
+	Gender    string `json:"gender"`
+	Likes     []string `json:"likes"`
+	Dislikes  []string `json:"dislikes"`
 }
 
 func (p Person) Age() int {

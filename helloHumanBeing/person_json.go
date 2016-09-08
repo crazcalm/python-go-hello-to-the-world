@@ -20,6 +20,12 @@ func main(){
     }
     fmt.Println(test)
 
+    data, err := json.MarshalIndent(test, "", "    ")
+    if err != nil{
+        panic(err)
+    }
+    fmt.Println(string(data))
+
     //passes content of file to a buffer
     b, err := ioutil.ReadFile("test_json")
     if err != nil{
