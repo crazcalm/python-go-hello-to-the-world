@@ -1,20 +1,18 @@
-{"people": [ 
-    {"marcus": {
+[ 
+    {
         "first_name": "Marcus",
         "last_name": "Willock",
         "birthday": "1988-01-19T00:00:00Z",
         "gender": "male",
         "likes": ["Python", "Golang"],
         "dislikes": ["Waking up early", "Reality TV"]
-        }
     },
-    {"jovanna": {
+    {
         "first_name": "Jovanna",
         "last_name": "Teran",
         "birthday": "1987-09-17T00:00:00Z",
         "gender": "female",
         "likes": ["My job", "My dog"],
         "dislikes": ["Being told what to do"]
-        }
     }
-]}
+]

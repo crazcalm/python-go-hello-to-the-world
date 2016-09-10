@@ -1,65 +1,62 @@
 package main
 
-import(
-    "time"
-    "fmt"
-    "io/ioutil"
-    "encoding/json"
-    "github.com/crazcalm/python-go-hello-to-the-world/helloHumanBeing/human"
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/crazcalm/python-go-hello-to-the-world/helloHumanBeing/human"
+	"io/ioutil"
+	"time"
 )
 
+func main() {
+	p1 := human.Person{
+		"Marcus",
+		"Willock",
+		time.Date(1988, time.January, 19, 0, 0, 0, 0, time.UTC),
+		"male",
+		[]string{"hanging out with friends"},
+		[]string{"waking up in the morning"},
+	}
 
-func main(){
-    test := human.Person{
-        "Marcus",
-        "Willock",
-        time.Date(1988, time.January, 19, 0, 0, 0, 0, time.UTC),
-        "male",
-        []string{"hanging out with friends"},
-        []string{"waking up in the morning"},
-    }
-    fmt.Println(test)
+	p2 := human.Person{
+		"Jovanna",
+		"Teran",
+		time.Date(1987, time.September, 17, 0, 0, 0, 0, time.UTC),
+		"female",
+		[]string{"yoga"},
+		[]string{"running"},
+	}
+	sliceP := []human.Person{p1, p2}
 
-    data, err := json.MarshalIndent(test, "", "    ")
-    if err != nil{
-        panic(err)
-    }
-    fmt.Println(string(data))
+	// Convert our people to json
+	data, err := json.MarshalIndent(sliceP, "", "    ")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(data))
 
-    //passes content of file to a buffer
-    b, err := ioutil.ReadFile("test_json")
-    if err != nil{
-        fmt.Errorf("Error reading file.")
-        panic(err)
-    }
-    fmt.Println(string(b))
+	// Opens the file and stores contents to buffer
+	b, err := ioutil.ReadFile("test_json")
+	if err != nil {
+		fmt.Errorf("Error reading file.")
+		panic(err)
+	}
 
-    var f interface{}
-    err = json.Unmarshal(b, &f)
-    if err != nil{
-        fmt.Errorf("Json Unmarshaled failed")
-        panic(err)
-    }
+	// Data structure used to convert json to Go code
+	var f []human.Person
+	err = json.Unmarshal(b, &f)
+	if err != nil {
+		fmt.Errorf("Json Unmarshaled failed")
+		panic(err)
+	}
+	fmt.Println(f) // Calls their String method
 
-    fmt.Println(f)
-
-    /*
-    var people = []Person{}
-    _, item := range data {
-        key, person := range item{
-            fname := person["first_name"]
-            lname := person["last_name"]
-            _bday := person["birthday"]
-            bday := time.Date(_bday["year"], _bday["month"], _bday["day"],
-                              0, 0, 0, 0, time.UTC)
-            gender := person["gender"]
-            likes := person["likes"]
-            dislikes := person["dislikes"]
-
-            append(people, Person{fname, lname, bday, gender, likes, dislikes})
-        }
-    }
-
-    fmt.Println(people)
-    */
+	for _, p := range f {
+		// Printing some stuff to screen as proof of a
+		// job well done!
+		fmt.Println(p.FirstName)
+		fmt.Println(p.LastName)
+		fmt.Println(p.Birthday)
+		fmt.Printf("\n-----------------\n")
+	}
 }
