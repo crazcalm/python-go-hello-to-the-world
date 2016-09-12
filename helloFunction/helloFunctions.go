@@ -39,11 +39,11 @@ func helloNParams2(names ...string) {
 
 //Go pointers
 func helloOneParamPointer(name *string) {
-	fmt.Printf("Hello %v\n\n", name)
+	fmt.Printf("Hello %s\n\n", *name)
 }
 
 func helloTwoParamsPointer(name1, name2 *string) {
-	fmt.Printf("Hello %v and %v\n\n", name1, name2)
+	fmt.Printf("Hello %s and %s\n\n", *name1, *name2)
 }
 
 func main() {
@@ -68,6 +68,7 @@ func main() {
 	helloNParams2(name1, name2)
 
 	//Pointer functions
+	fmt.Println("Pointer examples:")
 	helloOneParamPointer(name1Pointer)
 	helloTwoParamsPointer(name1Pointer, name2Pointer)
 }
